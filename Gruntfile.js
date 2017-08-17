@@ -71,12 +71,22 @@ module.exports = function(grunt) {
           cwd: 'source/html',
           src: ['**'],
           dest: 'public_html/'
+        },{
+          expand: true,
+          cwd: 'source/img',
+          src: ['**'],
+          dest: 'public_html/'
         }]
       },
       htmlrel: {
         files: [{
           expand: true,
           cwd: 'source/html',
+          src: ['**'],
+          dest: 'release_html/'
+        },{
+          expand: true,
+          cwd: 'source/img',
           src: ['**'],
           dest: 'release_html/'
         }]
