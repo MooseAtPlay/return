@@ -1,6 +1,6 @@
 var tiles = {
-  W: { s: [ -1, -1 ], w: false },
-  o: { s: [ -6, -2 ], t: 'Nice path!' }
+  W: { s: [ 1, 1 ], w: false },
+  o: { s: [ 6, 2 ], t: 'Nice path!' }
 };
 
 var rowCount = 9;
@@ -55,6 +55,14 @@ function loadRoom( r ) {
   console.log( r[0] );
   console.log( roomEl );
   console.log( tileEls  );
+
+
+  for ( var t = 0; t < tileEls.length; t++ ) {
+    tileKey = r[ t ];
+    tile = tiles[ tileKey ];
+    tileEls[t].style[ 'backgroundPositionX' ] = '-' + ( tile.s[ 0 ] * 16 ) + 'px';
+    tileEls[t].style[ 'backgroundPositionY' ] = '-' + ( tile.s[ 1 ] * 16 ) + 'px';
+  }
 }
 
 function start() {
