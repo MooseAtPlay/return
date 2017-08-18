@@ -7,12 +7,17 @@ function createRoom() {
         var rowEl = crEl("div");
         rowEl.className = "row";
         for (var col = 0; col < colCount; col++) apCh(rowEl, crEl("div"));
-        apCh(room, rowEl);
+        apCh(roomEl, rowEl);
     }
+    tileEls = byQ(".row div");
+}
+
+function loadRoom(r) {
+    console.log(r[0]), console.log(roomEl), console.log(tileEls);
 }
 
 function start() {
-    console.log(tiles), console.log(rooms), console.log(room), createRoom();
+    createRoom(), loadRoom(rooms[0]);
 }
 
 var tiles = {
@@ -24,5 +29,5 @@ var tiles = {
         s: [ -6, -2 ],
         t: "Nice path!"
     }
-}, rowCount = 9, colCount = 14, rooms = [ "WWWWWWWWWWWWWWWooooooooooooWWooooooooooooWWooooooooooooWWooooooooooooWWooooooooooooWWooooooooooooWWooooooooooooWWWWWWWWWWWWWWW" ], D = document, byId = D.getElementById.bind(D), crEl = D.createElement.bind(D), room = byId("room");
+}, rowCount = 9, colCount = 14, rooms = [ "WWWWWWWWWWWWWWWooooooooooooWWooooooooooooWWooooooooooooWWooooooooooooWWooooooooooooWWooooooooooooWWooooooooooooWWWWWWWWWWWWWWW" ], D = document, byId = D.getElementById.bind(D), byQ = D.querySelectorAll.bind(D), crEl = D.createElement.bind(D), roomEl = byId("room"), tileEls = null;
 //# sourceMappingURL=scripts.js.map
