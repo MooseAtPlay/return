@@ -9,7 +9,7 @@ function createRoom() {
         for (var col = 0; col < colCount; col++) apCh(rowEl, crEl("div"));
         apCh(roomEl, rowEl);
     }
-    tileEls = byQ(".row div");
+    tileEls = byQ(".row div"), roomEl.width = window.innerWidth, roomEl.style.transform = "scale(" + roomEl.width / 224 + ")";
 }
 
 function loadRoom(r) {

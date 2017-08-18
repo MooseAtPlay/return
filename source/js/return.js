@@ -49,6 +49,9 @@ function createRoom( ) {
     apCh( roomEl, rowEl );
   }
   tileEls = byQ( '.row div' );
+
+  roomEl.width = window.innerWidth;
+  roomEl.style.transform = 'scale(' + roomEl.width/(14*16) + ')';
 }
 
 function loadRoom( r ) {

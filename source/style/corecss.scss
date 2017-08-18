@@ -1,12 +1,18 @@
-#game {
-  width: 100%;
-  height: 100%;
+html, body {
+  margin: 0;
+  padding: 0;
+}
 
+#game {
   #room {
-    background: #dedede;
+    width: 16 * 14px;
+    height: 16 * 9px;
+    transform: scale(1);
+    transform-origin: 0 0;
 
     .row {
       height: 16px;
+      width: 16 * 14px;
       div {
         background-image: url(s.png);
         display: inline-block;

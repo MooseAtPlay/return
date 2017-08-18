@@ -1,16 +1,21 @@
-#game {
-  width: 100%;
-  height: 100%; }
-  #game #room {
-    background: #dedede; }
-    #game #room .row {
-      height: 16px; }
-      #game #room .row div {
-        background-image: url(s.png);
-        display: inline-block;
-        width: 16px;
-        height: 16px;
-        margin: 0;
-        padding: 0; }
+html, body {
+  margin: 0;
+  padding: 0; }
+
+#game #room {
+  width: 224px;
+  height: 144px;
+  transform: scale(1);
+  transform-origin: 0 0; }
+  #game #room .row {
+    height: 16px;
+    width: 224px; }
+    #game #room .row div {
+      background-image: url(s.png);
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      margin: 0;
+      padding: 0; }
 
 /*# sourceMappingURL=style.css.map */
