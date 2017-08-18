@@ -3,6 +3,7 @@ html, body {
   padding: 0; }
 
 #game #room {
+  overflow: hidden;
   width: 224px;
   height: 144px;
   transform: scale(1);

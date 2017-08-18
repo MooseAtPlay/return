@@ -10,16 +10,17 @@ var rooms = [
   // 0 - What now?
   'WWWWWWWWWWWWWW' + 
   'WooooooooooooW' + 
+  'WoooWooooWoooW' + 
   'WooooooooooooW' + 
-  'WooooooooooooW' + 
-  'WooooooooooooW' + 
-  'WooooooooooooW' + 
+  'WooWooooooWooW' + 
+  'WoooWWWWWWoooW' + 
   'WooooooooooooW' + 
   'WooooooooooooW' + 
   'WWWWWWWWWWWWWW' 
 ];
 
 var D = document;
+var W = window;
 var byId = D.getElementById.bind( D );
 var byQ = D.querySelectorAll.bind( D );
 var crEl = D.createElement.bind( D );
@@ -49,9 +50,19 @@ function createRoom( ) {
     apCh( roomEl, rowEl );
   }
   tileEls = byQ( '.row div' );
+}
 
-  roomEl.width = window.innerWidth;
-  roomEl.style.transform = 'scale(' + roomEl.width/(14*16) + ')';
+function scaleRoom( ) {
+  var scale = 1;
+  if ( W.innerWidth <= W.innerHeight ) {
+    roomEl.width = W.innerWidth;
+    scale = roomEl.width/(14*16);
+  } else {
+    scale = W.innerHeight/(9*16);
+    console.log(scale);
+  }
+    
+  roomEl.style.transform = 'scale(' + scale + ')';
 }
 
 function loadRoom( r ) {
@@ -70,6 +81,7 @@ function loadRoom( r ) {
 
 function start() {
   createRoom();
+  scaleRoom();
 
   loadRoom( rooms[ 0 ] );
 

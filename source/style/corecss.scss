@@ -5,6 +5,7 @@ html, body {
 
 #game {
   #room {
+    overflow: hidden;
     width: 16 * 14px;
     height: 16 * 9px;
     transform: scale(1);

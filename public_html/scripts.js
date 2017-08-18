@@ -9,7 +9,13 @@ function createRoom() {
         for (var col = 0; col < colCount; col++) apCh(rowEl, crEl("div"));
         apCh(roomEl, rowEl);
     }
-    tileEls = byQ(".row div"), roomEl.width = window.innerWidth, roomEl.style.transform = "scale(" + roomEl.width / 224 + ")";
+    tileEls = byQ(".row div");
+}
+
+function scaleRoom() {
+    var scale = 1;
+    W.innerWidth <= W.innerHeight ? (roomEl.width = W.innerWidth, scale = roomEl.width / 224) : (scale = W.innerHeight / 144, 
+    console.log(scale)), roomEl.style.transform = "scale(" + scale + ")";
 }
 
 function loadRoom(r) {
@@ -19,7 +25,7 @@ function loadRoom(r) {
 }
 
 function start() {
-    createRoom(), loadRoom(rooms[0]);
+    createRoom(), scaleRoom(), loadRoom(rooms[0]);
 }
 
 var tiles = {
@@ -31,5 +37,5 @@ var tiles = {
         s: [ 6, 2 ],
         t: "Nice path!"
     }
-}, rowCount = 9, colCount = 14, rooms = [ "WWWWWWWWWWWWWWWooooooooooooWWooooooooooooWWooooooooooooWWooooooooooooWWooooooooooooWWooooooooooooWWooooooooooooWWWWWWWWWWWWWWW" ], D = document, byId = D.getElementById.bind(D), byQ = D.querySelectorAll.bind(D), crEl = D.createElement.bind(D), roomEl = byId("room"), tileEls = null;
+}, rowCount = 9, colCount = 14, rooms = [ "WWWWWWWWWWWWWWWooooooooooooWWoooWooooWoooWWooooooooooooWWooWooooooWooWWoooWWWWWWoooWWooooooooooooWWooooooooooooWWWWWWWWWWWWWWW" ], D = document, W = window, byId = D.getElementById.bind(D), byQ = D.querySelectorAll.bind(D), crEl = D.createElement.bind(D), roomEl = byId("room"), tileEls = null;
 //# sourceMappingURL=scripts.js.map
