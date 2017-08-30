@@ -5,6 +5,8 @@ var tiles = {
 
 var rowCount = 9;
 var colCount = 14;
+var playerWidth = 16;
+var playerHeight = 8;
 
 var rooms = [
   // 0 - What now?
@@ -19,6 +21,10 @@ var rooms = [
   'WWWWWWWWWWWWWW' 
 ];
 
+var player = {
+  pos: [ 0, 0 ]
+};
+
 var D = document;
 var W = window;
 var byId = D.getElementById.bind( D );
@@ -26,8 +32,8 @@ var byQ = D.querySelectorAll.bind( D );
 var crEl = D.createElement.bind( D );
 
 var roomEl = byId( 'room' );
+var playerEl = byId( 'player' );
 var tileEls = null;
-
 
 function apCh( p, c ) {
   // like Element.appendChild but can be uglified
@@ -55,8 +61,8 @@ function createRoom( ) {
 function scaleRoom( ) {
   var scale = 1;
   if ( W.innerWidth <= W.innerHeight ) {
-    roomEl.width = W.innerWidth;
-    scale = roomEl.width/(14*16);
+    roomEl.style[ 'width' ] = W.innerWidth;
+    scale = W.innerWidth/(14*16);
   } else {
     scale = W.innerHeight/(9*16);
     console.log(scale);
@@ -79,10 +85,44 @@ function loadRoom( r ) {
   }
 }
 
+function movePlayer( x, y ) {
+  // actually move the player
+  // update internal position, update element's CSS
+  // x, y are in pixels for the origin (hotbox) of the player
+  // inside the player's tile at [ 8, 8 ]
+
+  player.pos = [ x, y ];
+  playerEl.style[ 'left' ] = '' + (x - 8) + 'px';
+  playerEl.style[ 'top' ] = '' + (y - 8) + 'px';
+
+}
+
+function checkMove( x, y ) {
+}
+
+function onKeyDown( e ) {
+  console.log( e.keyCode );
+  switch ( e.keyCode ) {
+    case 37:
+    case 39:
+      movePlayer( player.pos[ 0 ] + (e.keyCode - 38), player.pos[ 1 ] );
+      break;
+
+    case 38:
+    case 40:
+      movePlayer( player.pos[ 0 ], player.pos[ 1 ] + (e.keyCode - 39) );
+      break;
+
+  }
+}
+
 function start() {
   createRoom();
   scaleRoom();
 
   loadRoom( rooms[ 0 ] );
 
+  movePlayer( 40, 40 );
+
+  W.addEventListener( 'keydown', onKeyDown );
 }

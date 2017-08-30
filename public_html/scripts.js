@@ -14,7 +14,7 @@ function createRoom() {
 
 function scaleRoom() {
     var scale = 1;
-    W.innerWidth <= W.innerHeight ? (roomEl.width = W.innerWidth, scale = roomEl.width / 224) : (scale = W.innerHeight / 144, 
+    W.innerWidth <= W.innerHeight ? (roomEl.style.width = W.innerWidth, scale = W.innerWidth / 224) : (scale = W.innerHeight / 144, 
     console.log(scale)), roomEl.style.transform = "scale(" + scale + ")";
 }
 
@@ -24,8 +24,27 @@ function loadRoom(r) {
     tileEls[t].style.backgroundPositionX = "-" + 16 * tile.s[0] + "px", tileEls[t].style.backgroundPositionY = "-" + 16 * tile.s[1] + "px";
 }
 
+function movePlayer(x, y) {
+    player.pos = [ x, y ], playerEl.style.left = x - 8 + "px", playerEl.style.top = y - 8 + "px";
+}
+
+function checkMove(x, y) {}
+
+function onKeyDown(e) {
+    switch (console.log(e.keyCode), e.keyCode) {
+      case 37:
+      case 39:
+        movePlayer(player.pos[0] + (e.keyCode - 38), player.pos[1]);
+        break;
+
+      case 38:
+      case 40:
+        movePlayer(player.pos[0], player.pos[1] + (e.keyCode - 39));
+    }
+}
+
 function start() {
-    createRoom(), scaleRoom(), loadRoom(rooms[0]);
+    createRoom(), scaleRoom(), loadRoom(rooms[0]), movePlayer(40, 40), W.addEventListener("keydown", onKeyDown);
 }
 
 var tiles = {
@@ -37,5 +56,7 @@ var tiles = {
         s: [ 6, 2 ],
         t: "Nice path!"
     }
-}, rowCount = 9, colCount = 14, rooms = [ "WWWWWWWWWWWWWWWooooooooooooWWoooWooooWoooWWooooooooooooWWooWooooooWooWWoooWWWWWWoooWWooooooooooooWWooooooooooooWWWWWWWWWWWWWWW" ], D = document, W = window, byId = D.getElementById.bind(D), byQ = D.querySelectorAll.bind(D), crEl = D.createElement.bind(D), roomEl = byId("room"), tileEls = null;
+}, rowCount = 9, colCount = 14, playerWidth = 16, playerHeight = 8, rooms = [ "WWWWWWWWWWWWWWWooooooooooooWWoooWooooWoooWWooooooooooooWWooWooooooWooWWoooWWWWWWoooWWooooooooooooWWooooooooooooWWWWWWWWWWWWWWW" ], player = {
+    pos: [ 0, 0 ]
+}, D = document, W = window, byId = D.getElementById.bind(D), byQ = D.querySelectorAll.bind(D), crEl = D.createElement.bind(D), roomEl = byId("room"), playerEl = byId("player"), tileEls = null;
 //# sourceMappingURL=scripts.js.map
