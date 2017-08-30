@@ -25,7 +25,7 @@ function loadRoom(r) {
 }
 
 function movePlayer(x, y) {
-    player.pos = [ x, y ], playerEl.style.left = x - 8 + "px", playerEl.style.top = y - 8 + "px";
+    player.pos = [ x, y ], playerEl.style.left = x + "px", playerEl.style.top = y + "px";
 }
 
 function checkMove(x, y) {}
@@ -44,7 +44,7 @@ function onKeyDown(e) {
 }
 
 function start() {
-    createRoom(), scaleRoom(), loadRoom(rooms[0]), movePlayer(40, 40), W.addEventListener("keydown", onKeyDown);
+    createRoom(), scaleRoom(), loadRoom(rooms[0]), movePlayer(32, 32), W.addEventListener("keydown", onKeyDown);
 }
 
 var tiles = {
@@ -57,6 +57,7 @@ var tiles = {
         t: "Nice path!"
     }
 }, rowCount = 9, colCount = 14, playerWidth = 16, playerHeight = 8, rooms = [ "WWWWWWWWWWWWWWWooooooooooooWWoooWooooWoooWWooooooooooooWWooWooooooWooWWoooWWWWWWoooWWooooooooooooWWooooooooooooWWWWWWWWWWWWWWW" ], player = {
-    pos: [ 0, 0 ]
+    pos: [ 0, 0 ],
+    hitbox: [ 4, 8, 8, 8 ]
 }, D = document, W = window, byId = D.getElementById.bind(D), byQ = D.querySelectorAll.bind(D), crEl = D.createElement.bind(D), roomEl = byId("room"), playerEl = byId("player"), tileEls = null;
 //# sourceMappingURL=scripts.js.map

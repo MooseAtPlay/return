@@ -22,7 +22,8 @@ var rooms = [
 ];
 
 var player = {
-  pos: [ 0, 0 ]
+  pos: [ 0, 0 ],
+  hitbox: [ 4, 8, 8, 8 ]
 };
 
 var D = document;
@@ -88,12 +89,11 @@ function loadRoom( r ) {
 function movePlayer( x, y ) {
   // actually move the player
   // update internal position, update element's CSS
-  // x, y are in pixels for the origin (hotbox) of the player
-  // inside the player's tile at [ 8, 8 ]
+  // x, y are in pixels for the top-left of the player's sprite
 
   player.pos = [ x, y ];
-  playerEl.style[ 'left' ] = '' + (x - 8) + 'px';
-  playerEl.style[ 'top' ] = '' + (y - 8) + 'px';
+  playerEl.style[ 'left' ] = '' + x + 'px';
+  playerEl.style[ 'top' ] = '' + y + 'px';
 
 }
 
@@ -122,7 +122,7 @@ function start() {
 
   loadRoom( rooms[ 0 ] );
 
-  movePlayer( 40, 40 );
+  movePlayer( 32, 32 );
 
   W.addEventListener( 'keydown', onKeyDown );
 }
