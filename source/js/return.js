@@ -8,6 +8,13 @@ var colCount = 14;
 var playerWidth = 16;
 var playerHeight = 8;
 
+var velocityInUnitsPerSecond = 35;
+
+var isLeftDown = false;
+var isRightDown = false;
+var isUpDown = false;
+var isDownDown = false;
+
 var rooms = [
   // 0 - What now?
   'WWWWWWWWWWWWWW' + 
@@ -35,6 +42,8 @@ var crEl = D.createElement.bind( D );
 var roomEl = byId( 'room' );
 var playerEl = byId( 'player' );
 var tileEls = null;
+
+var then = 0; /* used for FPS management */
 
 function apCh( p, c ) {
   // like Element.appendChild but can be uglified
@@ -101,19 +110,75 @@ function checkMove( x, y ) {
 }
 
 function onKeyDown( e ) {
-  console.log( e.keyCode );
+  //console.log( 'keydown', e.keyCode );
   switch ( e.keyCode ) {
     case 37:
-    case 39:
-      movePlayer( player.pos[ 0 ] + (e.keyCode - 38), player.pos[ 1 ] );
+      isLeftDown = true;
       break;
 
     case 38:
+      isUpDown = true;
+      break;
+
+    case 39:
+      isRightDown = true;
+      break;
+
     case 40:
-      movePlayer( player.pos[ 0 ], player.pos[ 1 ] + (e.keyCode - 39) );
+      isDownDown = true;
       break;
 
   }
+}
+
+function onKeyUp( e ) {
+  //console.log( 'keyup', e.keyCode );
+  switch ( e.keyCode ) {
+    case 37:
+      isLeftDown = false;
+      break;
+
+    case 38:
+      isUpDown = false;
+      break;
+
+    case 39:
+      isRightDown = false;
+      break;
+
+    case 40:
+      isDownDown = false;
+      break;
+
+  }
+}
+
+function render( time ) {
+   var timeInSeconds = time * 0.001;
+   var deltaTimeInSeconds = timeInSeconds - then;
+
+   then = timeInSeconds;
+
+   var newX = player.pos[ 0 ];
+   var newY = player.pos[ 1 ];
+
+   if ( isLeftDown ) {
+     newX -= velocityInUnitsPerSecond * deltaTimeInSeconds;
+   }
+   if ( isRightDown ) {
+     newX += velocityInUnitsPerSecond * deltaTimeInSeconds;
+   }
+   if ( isUpDown ) {
+     newY -= velocityInUnitsPerSecond * deltaTimeInSeconds;
+   }
+   if ( isDownDown ) {
+     newY += velocityInUnitsPerSecond * deltaTimeInSeconds;
+   }
+
+   movePlayer( newX, newY );
+   //xPosition = xPosition + velocityInUnitsPerSecond * deltaTimeInSeconds;
+
+   requestAnimationFrame( render );
 }
 
 function start() {
@@ -125,4 +190,8 @@ function start() {
   movePlayer( 32, 32 );
 
   W.addEventListener( 'keydown', onKeyDown );
+  W.addEventListener( 'keyup', onKeyUp );
+
+  requestAnimationFrame( render );
+
 }
