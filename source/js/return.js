@@ -3,17 +3,13 @@ var tiles = {
   o: { s: [ 6, 2 ], t: 'Nice path!' }
 };
 
+var tileWidth = 16;
+var tileHeight = 16;
+
 var rowCount = 9;
 var colCount = 14;
-var playerWidth = 16;
-var playerHeight = 8;
 
 var velocityInUnitsPerSecond = 35;
-
-var isLeftDown = false;
-var isRightDown = false;
-var isUpDown = false;
-var isDownDown = false;
 
 var rooms = [
   // 0 - What now?
@@ -28,21 +24,30 @@ var rooms = [
   'WWWWWWWWWWWWWW' 
 ];
 
-var player = {
-  pos: [ 0, 0 ],
-  hitbox: [ 4, 8, 8, 8 ]
-};
-
 var D = document;
 var W = window;
+var M = Math;
 var byId = D.getElementById.bind( D );
 var byQ = D.querySelectorAll.bind( D );
 var crEl = D.createElement.bind( D );
+var floor = M.floor.bind( M );
 
 var roomEl = byId( 'room' );
 var playerEl = byId( 'player' );
 var tileEls = null;
 
+var isLeftDown = false;
+var isRightDown = false;
+var isUpDown = false;
+var isDownDown = false;
+
+var player = {
+  pos: [ 0, 0 ],
+  hitbox: [ 4, 8, 8, 8 ]
+};
+
+var currentTile = '';
+var currentRoom = null;
 var then = 0; /* used for FPS management */
 
 function apCh( p, c ) {
@@ -86,6 +91,7 @@ function loadRoom( r ) {
   console.log( roomEl );
   console.log( tileEls  );
 
+  currentRoom = r;
 
   for ( var t = 0; t < tileEls.length; t++ ) {
     tileKey = r[ t ];
@@ -106,11 +112,13 @@ function movePlayer( x, y ) {
 
 }
 
-function checkMove( x, y ) {
+function tileAtPos( x, y ) {
+  var tileX = floor( x / tileWidth );
+  var tileY = floor( y / tileHeight );
+  return currentRoom[ tileY * colCount + tileX ];
 }
 
 function onKeyDown( e ) {
-  //console.log( 'keydown', e.keyCode );
   switch ( e.keyCode ) {
     case 37:
       isLeftDown = true;
@@ -132,7 +140,6 @@ function onKeyDown( e ) {
 }
 
 function onKeyUp( e ) {
-  //console.log( 'keyup', e.keyCode );
   switch ( e.keyCode ) {
     case 37:
       isLeftDown = false;
@@ -175,8 +182,18 @@ function render( time ) {
      newY += velocityInUnitsPerSecond * deltaTimeInSeconds;
    }
 
+   if ( newX !== 0 ) {
+
+   }
+
    movePlayer( newX, newY );
-   //xPosition = xPosition + velocityInUnitsPerSecond * deltaTimeInSeconds;
+
+   var newCurTile = tileAtPos( newX, newX );
+   if ( newCurTile !== currentTile ) {
+     console.log( newCurTile );
+   }
+   currentTile = newCurTile;
+
 
    requestAnimationFrame( render );
 }
@@ -188,6 +205,7 @@ function start() {
   loadRoom( rooms[ 0 ] );
 
   movePlayer( 32, 32 );
+  currentTile = tileAtPos( 32, 32 );
 
   W.addEventListener( 'keydown', onKeyDown );
   W.addEventListener( 'keyup', onKeyUp );
