@@ -75,15 +75,21 @@ function createRoom( ) {
 
 function scaleRoom( ) {
   var scale = 1;
+  scaleWidth = W.innerWidth/(14*16);
+  scaleHeight = (W.innerHeight)/(9*16);
+
+  console.log( scaleWidth, scaleHeight );
+
+  roomEl.style.transform = 'scale(' + M.min( scaleWidth, scaleHeight ) + ')';
+  /*
   if ( W.innerWidth <= W.innerHeight ) {
     roomEl.style[ 'width' ] = W.innerWidth;
-    scale = W.innerWidth/(14*16);
   } else {
-    scale = W.innerHeight/(9*16);
-    console.log(scale);
+    scale = (W.innerHeight - 40)/(9*16);
   }
+  console.log(scale);
     
-  roomEl.style.transform = 'scale(' + scale + ')';
+  */
 }
 
 function loadRoom( r ) {
