@@ -82,6 +82,14 @@ module.exports = function(grunt) {
           dest: 'public_html/'
         }]
       },
+      jslibdev: {
+        files: [{
+          expand: true,
+          cwd: 'lib',
+          src: ['**'],
+          dest: 'public_html/'
+        }]
+      },
       htmlrel: {
         files: [{
           expand: true,
@@ -93,6 +101,14 @@ module.exports = function(grunt) {
           cwd: 'source/img',
           src: ['**'],
           dest: 'release_html/'
+        }]
+      },
+      jslibrel: {
+        files: [{
+          expand: true,
+          cwd: 'lib',
+          src: ['**'],
+          dest: 'public_html/'
         }]
       }
     },
@@ -136,6 +152,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-contrib-compress');
 
-  grunt.registerTask('develop', ['sass:dev', 'uglify:dev', 'copy:htmldev', 'http-server:local', 'open', 'watch']);
-  grunt.registerTask('release', ['sass:rel', 'uglify:rel', 'copy:htmlrel','compress:makezip']);
+  grunt.registerTask('develop', ['sass:dev', 'uglify:dev', 'copy:htmldev', 'copy:jslibdev', 'http-server:local', 'open', 'watch']);
+  grunt.registerTask('release', ['sass:rel', 'uglify:rel', 'copy:htmlrel', 'copy:jslibrel', 'compress:makezip']);
 };

@@ -13,8 +13,7 @@ function createRoom() {
 }
 
 function scaleRoom() {
-    scaleWidth = W.innerWidth / 224, scaleHeight = W.innerHeight / 144, console.log(scaleWidth, scaleHeight), 
-    roomEl.style.transform = "scale(" + M.min(scaleWidth, scaleHeight) + ")";
+    scaleWidth = W.innerWidth / 224, scaleHeight = W.innerHeight / 144, roomEl.style.transform = "scale(" + M.min(scaleWidth, scaleHeight) + ")";
 }
 
 function loadRoom(r) {

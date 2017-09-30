@@ -78,18 +78,7 @@ function scaleRoom( ) {
   scaleWidth = W.innerWidth/(14*16);
   scaleHeight = (W.innerHeight)/(9*16);
 
-  console.log( scaleWidth, scaleHeight );
-
   roomEl.style.transform = 'scale(' + M.min( scaleWidth, scaleHeight ) + ')';
-  /*
-  if ( W.innerWidth <= W.innerHeight ) {
-    roomEl.style[ 'width' ] = W.innerWidth;
-  } else {
-    scale = (W.innerHeight - 40)/(9*16);
-  }
-  console.log(scale);
-    
-  */
 }
 
 function loadRoom( r ) {
